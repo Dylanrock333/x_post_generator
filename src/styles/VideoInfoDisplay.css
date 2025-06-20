@@ -20,7 +20,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 0.9em;
-    color: #b0b0b0;
+    color: #d1d5db;
     margin-bottom: 8px;
   }
   
@@ -36,7 +36,7 @@
   
   .video-tags {
     font-size: 0.9em;
-    color: #b0b0b0;
+    color: #d1d5db;
     line-height: 1.4;
   }
   

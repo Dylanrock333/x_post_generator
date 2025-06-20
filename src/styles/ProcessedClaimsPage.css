@@ -16,7 +16,7 @@
 .processed-claims-page h2 {
     text-align: center;
     margin-bottom: 2rem;
-    color: #333;
+    color: #ffffff;
 }
 
 /* Re-using some styles from VideoInput.css to keep it consistent */
@@ -43,12 +43,12 @@
 .claim-card h4 {
     margin-top: 0;
     margin-bottom: 0.5rem;
-    color: #0056b3;
+    color: #ffffff;
 }
   
 .claim-quote {
     font-style: italic;
-    color: #d0d0d0;
+    color: #ffffff;
     margin: 1rem 0;
     padding-left: 1rem;
     border-left: 3px solid #007bff;
@@ -58,13 +58,13 @@
 }
   
 .claim-context {
-    color: #c0c0c0;
+    color: #ffffff;
     font-size: 0.95rem;
     line-height: 1.5;
 }
   
 .claim-context strong {
-    color: #e0e0e0;
+    color: #ffffff;
 }
   
 .claim-meta {
@@ -74,7 +74,7 @@
     flex-wrap: wrap;
     gap: 10px;
     font-size: 0.9rem;
-    color: #b0b0b0;
+    color: #d1d5db;
     border-top: 1px solid #444;
     padding-top: 1rem;
 }
@@ -143,7 +143,7 @@
 .generating-text {
     margin-top: 15px;
     font-style: italic;
-    color: #b0b0b0;
+    color: #d1d5db;
 }
 
 .generated-post-container {
@@ -169,7 +169,7 @@
     display: block;
     margin-bottom: 5px;
     font-weight: 600;
-    color: #b0b0b0;
+    color: #d1d5db;
     font-size: 0.9rem;
 }
 

@@ -125,7 +125,7 @@
 .analysis-result-display h3 {
   text-align: center;
   margin-bottom: 1rem;
-  color: #333;
+  color: #ffffff;
 }
 
 .claims-container {
@@ -150,7 +150,7 @@
 .claim-card h4 {
   margin-top: 0;
   margin-bottom: 0.5rem;
-  color: #0056b3;
+  color: #79c0ff;
 }
 
 .claim-quote {
@@ -158,12 +158,12 @@
   margin: 1rem 0;
   padding-left: 1rem;
   border-left: 4px solid #007bff;
-  color: #555;
+  color: #d1d5db;
 }
 
 .claim-context {
   font-size: 0.9rem;
-  color: #555;
+  color: #d1d5db;
   line-height: 1.5;
 }
 
@@ -174,7 +174,7 @@
   flex-wrap: wrap;
   gap: 1rem;
   font-size: 0.85rem;
-  color: #777;
+  color: #a1a1a1;
   border-top: 1px solid #eee;
   padding-top: 1rem;
 }
