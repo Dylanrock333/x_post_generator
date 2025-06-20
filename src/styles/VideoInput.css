@@ -237,17 +237,39 @@
 }
 
 @media (max-width: 768px) {
+  .video-input-section {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 0;
+  }
+
   .input-group {
     flex-direction: column;
     gap: 0.5rem;
   }
   
-  .video-url-input {
+  .video-url-input,
+  .check-button {
     width: 100%;
+    border-radius: 5px;
+  }
+
+  .video-url-input {
+    border-radius: 5px;
   }
   
   .check-button {
-    width: 100%;
-    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    border-left: 1px solid #007bff;
+  }
+
+  .claim-card {
+    padding: 1rem;
+  }
+
+  .claim-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
   }
 } 
