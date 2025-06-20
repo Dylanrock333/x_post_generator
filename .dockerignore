@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Build artifacts
+build/
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Nginx config
+nginx/
+
+# Readme
+README.md 

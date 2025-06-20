@@ -1,0 +1,198 @@
+.processed-claims-page {
+    padding: 2rem;
+    background-color: #444;
+    min-height: 100vh;
+}
+
+.processed-claims-page .container {
+    max-width: 900px;
+    margin: auto;
+    background-color: #242424;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.processed-claims-page h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+/* Re-using some styles from VideoInput.css to keep it consistent */
+.claims-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+  
+.claim-card {
+    background-color: #333333;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.claim-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+  
+.claim-card h4 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: #0056b3;
+}
+  
+.claim-quote {
+    font-style: italic;
+    color: #d0d0d0;
+    margin: 1rem 0;
+    padding-left: 1rem;
+    border-left: 3px solid #007bff;
+    background-color: #2c2c2c;
+    padding: 10px 15px;
+    border-radius: 4px;
+}
+  
+.claim-context {
+    color: #c0c0c0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+  
+.claim-context strong {
+    color: #e0e0e0;
+}
+  
+.claim-meta {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #b0b0b0;
+    border-top: 1px solid #444;
+    padding-top: 1rem;
+}
+
+.generation-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+}
+
+.prompt-container {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.prompt-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #f0f0f0;
+}
+
+.prompt-textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #555;
+    font-family: inherit;
+    resize: vertical;
+    box-sizing: border-box;
+    background-color: #2c2c2c;
+    color: #f0f0f0;
+}
+
+.prompt-textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0,123,255,.25);
+}
+
+.generate-post-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+    width: 100%;
+}
+
+.generate-post-button:hover:not(:disabled) {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+.generate-post-button:disabled {
+    background-color: #555;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.generating-text {
+    margin-top: 15px;
+    font-style: italic;
+    color: #b0b0b0;
+}
+
+.generated-post-container {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #2c2c2c;
+    border: 1px solid #444;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.generated-post-container h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+.source-url-container {
+    margin-bottom: 15px;
+}
+
+.source-url-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #b0b0b0;
+    font-size: 0.9rem;
+}
+
+.source-url-input {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 4px;
+    border: 1px solid #555;
+    background-color: #333;
+    color: #f0f0f0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+.raw-post-output {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    word-wrap: break-word;     /* Internet Explorer 5.5+ */
+    background-color: #222;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    color: #f0f0f0;
+} 
