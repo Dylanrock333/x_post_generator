@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/VideoInput.css';
 import { validateUrl } from '../utils/urlDecoder';
@@ -8,15 +8,37 @@ import AnalysisResultDisplay from './AnalysisResultDisplay';
 import VideoInfoDisplay from './VideoInfoDisplay';
 
 const VideoInput = () => {
-  const [videoUrl, setVideoUrl] = useState('');
+  const [videoUrl, setVideoUrl] = useState(() => sessionStorage.getItem('videoUrl_input') || '');
   const [origin, setOrigin] = useState('');
   const [videoID, setVideoID] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [analysisData, setAnalysisData] = useState(null);
+  const [analysisData, setAnalysisData] = useState(() => {
+    const saved = sessionStorage.getItem('analysisData');
+    return saved ? JSON.parse(saved) : null;
+  });
   const [error, setError] = useState(null);
   const [percentage, setPercentage] = useState(0);
-  const [selectedClaims, setSelectedClaims] = useState([]);
+  const [selectedClaims, setSelectedClaims] = useState(() => {
+    const saved = sessionStorage.getItem('selectedClaims');
+    return saved ? JSON.parse(saved) : [];
+  });
   const navigate = useNavigate();
+
+  useEffect(() => {
+    sessionStorage.setItem('videoUrl_input', videoUrl);
+  }, [videoUrl]);
+
+  useEffect(() => {
+    if (analysisData) {
+      sessionStorage.setItem('analysisData', JSON.stringify(analysisData));
+    } else {
+      sessionStorage.removeItem('analysisData');
+    }
+  }, [analysisData]);
+
+  useEffect(() => {
+    sessionStorage.setItem('selectedClaims', JSON.stringify(selectedClaims));
+  }, [selectedClaims]);
 
   const handleClaimSelection = (claimId, isSelected) => {
     setSelectedClaims(prevSelected => {
@@ -58,6 +80,7 @@ const VideoInput = () => {
 
     setIsLoading(true);
     setAnalysisData(null);
+    setSelectedClaims([]);
     setError(null);
     setPercentage(0);
 

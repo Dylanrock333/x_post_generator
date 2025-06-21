@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../styles/ProcessedClaimsPage.css';
 import VideoInfoDisplay from './VideoInfoDisplay';
@@ -6,13 +6,76 @@ import { generatePost } from '../api/api';
 
 const ProcessedClaimsPage = () => {
   const location = useLocation();
-  const { processedClaims = [], videoData, videoUrl } = location.state || {};
+
+  const [processedClaims, setProcessedClaims] = useState(() => {
+    const fromState = location.state?.processedClaims;
+    if (fromState && fromState.length > 0) {
+      sessionStorage.setItem('processedClaims', JSON.stringify(fromState));
+      return fromState;
+    }
+    const fromStorage = sessionStorage.getItem('processedClaims');
+    return fromStorage ? JSON.parse(fromStorage) : [];
+  });
+
+  const [videoData, setVideoData] = useState(() => {
+    const fromState = location.state?.videoData;
+    if (fromState) {
+      sessionStorage.setItem('videoData', JSON.stringify(fromState));
+      return fromState;
+    }
+    const fromStorage = sessionStorage.getItem('videoData');
+    return fromStorage ? JSON.parse(fromStorage) : null;
+  });
+
+  const [videoUrl, setVideoUrl] = useState(() => {
+    const fromState = location.state?.videoUrl;
+    if (fromState) {
+      sessionStorage.setItem('videoUrl', fromState);
+      return fromState;
+    }
+    return sessionStorage.getItem('videoUrl') || '';
+  });
+
+  useEffect(() => {
+    if (location.state) {
+      if (location.state.processedClaims) {
+        setProcessedClaims(location.state.processedClaims);
+        sessionStorage.setItem('processedClaims', JSON.stringify(location.state.processedClaims));
+      }
+      if (location.state.videoData) {
+        setVideoData(location.state.videoData);
+        sessionStorage.setItem('videoData', JSON.stringify(location.state.videoData));
+      }
+      if (location.state.videoUrl) {
+        setVideoUrl(location.state.videoUrl);
+        sessionStorage.setItem('videoUrl', location.state.videoUrl);
+      }
+    }
+  }, [location.state]);
+
   const [isGenerating, setIsGenerating] = useState(false);
-  const [generatedPost, setGeneratedPost] = useState('');
+  const [generatedPost, setGeneratedPost] = useState(() => sessionStorage.getItem('generatedPost') || '');
   const [generationError, setGenerationError] = useState(null);
-  const [customPrompt, setCustomPrompt] = useState('');
+  const [customPrompt, setCustomPrompt] = useState(() => sessionStorage.getItem('customPrompt') || '');
   const [isUrlCopied, setIsUrlCopied] = useState(false);
   const [copiedSections, setCopiedSections] = useState({});
+
+  useEffect(() => {
+    if (location.state?.processedClaims?.length > 0) {
+      setGeneratedPost('');
+      sessionStorage.removeItem('generatedPost');
+      setCustomPrompt('');
+      sessionStorage.removeItem('customPrompt');
+    }
+  }, [location.state?.processedClaims]);
+
+  useEffect(() => {
+    sessionStorage.setItem('generatedPost', generatedPost);
+  }, [generatedPost]);
+
+  useEffect(() => {
+    sessionStorage.setItem('customPrompt', customPrompt);
+  }, [customPrompt]);
 
   const handleCopyUrl = () => {
     navigator.clipboard.writeText(videoUrl).then(() => {
