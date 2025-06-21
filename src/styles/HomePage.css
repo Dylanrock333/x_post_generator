@@ -38,7 +38,7 @@
 
 @media (max-width: 768px) {
   .main-content {
-    padding: 1rem;
+    padding: 0.25rem;
   }
   
   .hero-section h1 {

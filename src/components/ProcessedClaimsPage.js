@@ -11,6 +11,36 @@ const ProcessedClaimsPage = () => {
   const [generatedPost, setGeneratedPost] = useState('');
   const [generationError, setGenerationError] = useState(null);
   const [customPrompt, setCustomPrompt] = useState('');
+  const [isUrlCopied, setIsUrlCopied] = useState(false);
+  const [copiedSections, setCopiedSections] = useState({});
+
+  const handleCopyUrl = () => {
+    navigator.clipboard.writeText(videoUrl).then(() => {
+      setIsUrlCopied(true);
+      setTimeout(() => setIsUrlCopied(false), 2000);
+    });
+  };
+
+  const handleCopySection = (sectionIndex, sectionContent) => {
+    navigator.clipboard.writeText(sectionContent).then(() => {
+      setCopiedSections(prev => ({ ...prev, [sectionIndex]: true }));
+      setTimeout(() => {
+        setCopiedSections(prev => ({ ...prev, [sectionIndex]: false }));
+      }, 2000);
+    });
+  };
+
+  const parseGeneratedPost = (postContent) => {
+    if (!postContent) return [];
+    
+    // Split by *** or --- and filter out empty sections
+    const sections = postContent
+      .split(/\*\*\*|---/)
+      .map(section => section.trim())
+      .filter(section => section.length > 0);
+    
+    return sections;
+  };
 
   const handleGeneratePost = async () => {
     setIsGenerating(true);
@@ -70,7 +100,7 @@ const ProcessedClaimsPage = () => {
               value={customPrompt}
               onChange={(e) => setCustomPrompt(e.target.value)}
               placeholder="e.g., Write a Twitter thread about the most surprising facts from this video..."
-              rows="3"
+              rows="6"
               disabled={isGenerating}
             ></textarea>
           </div>
@@ -91,15 +121,41 @@ const ProcessedClaimsPage = () => {
               <h3>Generated Post:</h3>
               <div className="source-url-container">
                 <label htmlFor="videoUrl">Source Video URL:</label>
-                <input 
-                  type="text" 
-                  id="videoUrl"
-                  value={videoUrl} 
-                  readOnly 
-                  className="source-url-input"
-                />
+                <div className="input-with-icon">
+                  <input 
+                    type="text" 
+                    id="videoUrl"
+                    value={videoUrl} 
+                    readOnly 
+                    className="source-url-input"
+                  />
+                  <button onClick={handleCopyUrl} className="copy-url-button" title="Copy URL">
+                    {isUrlCopied ? 'Copied!' : <i className="fas fa-copy"></i>}
+                  </button>
+                </div>
               </div>
-              <pre className="raw-post-output">{generatedPost}</pre>
+              <div className="post-sections">
+                {parseGeneratedPost(generatedPost).map((section, index) => (
+                  <div key={index} className="post-section">
+                    <div className="section-header">
+                      <label>Section {index + 1}:</label>
+                      <button 
+                        onClick={() => handleCopySection(index, section)} 
+                        className="copy-section-button" 
+                        title="Copy Section"
+                      >
+                        {copiedSections[index] ? 'Copied!' : <i className="fas fa-copy"></i>}
+                      </button>
+                    </div>
+                    <textarea
+                      value={section}
+                      readOnly
+                      className="post-section-textarea"
+                      rows={Math.min(Math.max(section.split('\n').length, 11), 25)}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>
