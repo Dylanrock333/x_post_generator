@@ -58,6 +58,7 @@ const ProcessedClaimsPage = () => {
   const [generationError, setGenerationError] = useState(null);
   const [customPrompt, setCustomPrompt] = useState(() => sessionStorage.getItem('customPrompt') || '');
   const [isUrlCopied, setIsUrlCopied] = useState(false);
+  const [isThumbnailCopied, setIsThumbnailCopied] = useState(false);
   const [copiedSections, setCopiedSections] = useState({});
 
   useEffect(() => {
@@ -82,6 +83,53 @@ const ProcessedClaimsPage = () => {
       setIsUrlCopied(true);
       setTimeout(() => setIsUrlCopied(false), 2000);
     });
+  };
+
+  const handleCopyThumbnail = async () => {
+    if (!videoData?.thumbnail) return;
+
+    try {
+      const response = await fetch(videoData.thumbnail);
+      const jpegBlob = await response.blob();
+
+      // Convert JPEG Blob to PNG Blob via canvas because PNG is more widely supported for clipboard writing
+      const pngBlob = await new Promise((resolve, reject) => {
+        const img = new Image();
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const objectUrl = URL.createObjectURL(jpegBlob);
+
+        img.onload = () => {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+          canvas.toBlob((blob) => {
+            resolve(blob);
+            URL.revokeObjectURL(objectUrl);
+          }, 'image/png');
+        };
+
+        img.onerror = (err) => {
+          reject(err);
+          URL.revokeObjectURL(objectUrl);
+        };
+        
+        img.src = objectUrl;
+      });
+
+      if (!pngBlob) {
+        throw new Error("Canvas to Blob conversion failed");
+      }
+
+      const item = new ClipboardItem({ 'image/png': pngBlob });
+      await navigator.clipboard.write([item]);
+      
+      setIsThumbnailCopied(true);
+      setTimeout(() => setIsThumbnailCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy image: ", err);
+      // You could add user-facing error handling here if desired
+    }
   };
 
   const handleCopySection = (sectionIndex, sectionContent) => {
@@ -194,6 +242,20 @@ const ProcessedClaimsPage = () => {
                   />
                   <button onClick={handleCopyUrl} className="copy-url-button" title="Copy URL">
                     {isUrlCopied ? 'Copied!' : <i className="fas fa-copy"></i>}
+                  </button>
+                </div>
+              </div>
+              <div className="source-url-container">
+                <label>Source Thumbnail Image:</label>
+                <div className="input-with-icon">
+                  <input 
+                    type="text" 
+                    value="Click button to copy thumbnail" 
+                    readOnly 
+                    className="source-url-input"
+                  />
+                  <button onClick={handleCopyThumbnail} className="copy-url-button" title="Copy Thumbnail Image">
+                    {isThumbnailCopied ? 'Copied!' : <i className="fas fa-image"></i>}
                   </button>
                 </div>
               </div>
