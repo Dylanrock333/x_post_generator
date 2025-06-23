@@ -201,7 +201,7 @@ const ProcessedClaimsPage = () => {
                 {parseGeneratedPost(generatedPost).map((section, index) => (
                   <div key={index} className="post-section">
                     <div className="section-header">
-                      <label>Section {index + 1}:</label>
+                      <label>Section {index}:</label>
                       <button 
                         onClick={() => handleCopySection(index, section)} 
                         className="copy-section-button" 
@@ -214,7 +214,7 @@ const ProcessedClaimsPage = () => {
                       value={section}
                       readOnly
                       className="post-section-textarea"
-                      rows={Math.min(Math.max(section.split('\n').length, 11), 25)}
+                      rows={Math.min(Math.max(section.split('\n').length, 14), 27)}
                     />
                   </div>
                 ))}
