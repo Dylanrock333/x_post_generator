@@ -258,6 +258,18 @@ const ProcessedClaimsPage = () => {
                     {isThumbnailCopied ? 'Copied!' : <i className="fas fa-image"></i>}
                   </button>
                 </div>
+                <button
+                  className="redirect-thumbnail-button"
+                  style={{ marginTop: '8px' }}
+                  onClick={() => {
+                    if (videoData?.thumbnail) {
+                      window.open(videoData.thumbnail, '_blank');
+                    }
+                  }}
+                  disabled={!videoData?.thumbnail}
+                >
+                  Redirect to Thumbnail
+                </button>
               </div>
               <div className="post-sections">
                 {parseGeneratedPost(generatedPost).map((section, index) => (
