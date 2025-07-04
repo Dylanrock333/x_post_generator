@@ -31,7 +31,7 @@ export const analyzeVideoWithProgress = async (
         const rateLimitData = await response.json();
         const error = new Error(rateLimitData.message || 'Rate limit reached');
         error.rateLimitData = rateLimitData; 
-        sessionStorage.setItem('rateLimitInfo', JSON.stringify({
+        localStorage.setItem('rateLimitInfo', JSON.stringify({
           isLimited: true,
           resetTime: rateLimitData.resetTime,
           message: rateLimitData.message || 'Rate limit exceeded.'
@@ -46,7 +46,7 @@ export const analyzeVideoWithProgress = async (
       }
   
       // Clear rate limit info on successful connection
-      sessionStorage.removeItem('rateLimitInfo');
+      localStorage.removeItem('rateLimitInfo');
   
       const reader = response.body.getReader();
       const decoder = new TextDecoder();

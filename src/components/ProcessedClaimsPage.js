@@ -10,53 +10,53 @@ const ProcessedClaimsPage = () => {
   const [processedClaims, setProcessedClaims] = useState(() => {
     const fromState = location.state?.processedClaims;
     if (fromState && fromState.length > 0) {
-      sessionStorage.setItem('processedClaims', JSON.stringify(fromState));
+      localStorage.setItem('processedClaims', JSON.stringify(fromState));
       return fromState;
     }
-    const fromStorage = sessionStorage.getItem('processedClaims');
+    const fromStorage = localStorage.getItem('processedClaims');
     return fromStorage ? JSON.parse(fromStorage) : [];
   });
 
   const [videoData, setVideoData] = useState(() => {
     const fromState = location.state?.videoData;
     if (fromState) {
-      sessionStorage.setItem('videoData', JSON.stringify(fromState));
+      localStorage.setItem('videoData', JSON.stringify(fromState));
       return fromState;
     }
-    const fromStorage = sessionStorage.getItem('videoData');
+    const fromStorage = localStorage.getItem('videoData');
     return fromStorage ? JSON.parse(fromStorage) : null;
   });
 
   const [videoUrl, setVideoUrl] = useState(() => {
     const fromState = location.state?.videoUrl;
     if (fromState) {
-      sessionStorage.setItem('videoUrl', fromState);
+      localStorage.setItem('videoUrl', fromState);
       return fromState;
     }
-    return sessionStorage.getItem('videoUrl') || '';
+    return localStorage.getItem('videoUrl') || '';
   });
 
   useEffect(() => {
     if (location.state) {
       if (location.state.processedClaims) {
         setProcessedClaims(location.state.processedClaims);
-        sessionStorage.setItem('processedClaims', JSON.stringify(location.state.processedClaims));
+        localStorage.setItem('processedClaims', JSON.stringify(location.state.processedClaims));
       }
       if (location.state.videoData) {
         setVideoData(location.state.videoData);
-        sessionStorage.setItem('videoData', JSON.stringify(location.state.videoData));
+        localStorage.setItem('videoData', JSON.stringify(location.state.videoData));
       }
       if (location.state.videoUrl) {
         setVideoUrl(location.state.videoUrl);
-        sessionStorage.setItem('videoUrl', location.state.videoUrl);
+        localStorage.setItem('videoUrl', location.state.videoUrl);
       }
     }
   }, [location.state]);
 
   const [isGenerating, setIsGenerating] = useState(false);
-  const [generatedPost, setGeneratedPost] = useState(() => sessionStorage.getItem('generatedPost') || '');
+  const [generatedPost, setGeneratedPost] = useState(() => localStorage.getItem('generatedPost') || '');
   const [generationError, setGenerationError] = useState(null);
-  const [customPrompt, setCustomPrompt] = useState(() => sessionStorage.getItem('customPrompt') || '');
+  const [customPrompt, setCustomPrompt] = useState(() => localStorage.getItem('customPrompt') || '');
   const [isUrlCopied, setIsUrlCopied] = useState(false);
   const [isThumbnailCopied, setIsThumbnailCopied] = useState(false);
   const [copiedSections, setCopiedSections] = useState({});
@@ -64,18 +64,18 @@ const ProcessedClaimsPage = () => {
   useEffect(() => {
     if (location.state?.processedClaims?.length > 0) {
       setGeneratedPost('');
-      sessionStorage.removeItem('generatedPost');
+      localStorage.removeItem('generatedPost');
       setCustomPrompt('');
-      sessionStorage.removeItem('customPrompt');
+      localStorage.removeItem('customPrompt');
     }
   }, [location.state?.processedClaims]);
 
   useEffect(() => {
-    sessionStorage.setItem('generatedPost', generatedPost);
+    localStorage.setItem('generatedPost', generatedPost);
   }, [generatedPost]);
 
   useEffect(() => {
-    sessionStorage.setItem('customPrompt', customPrompt);
+    localStorage.setItem('customPrompt', customPrompt);
   }, [customPrompt]);
 
   const handleCopyUrl = () => {
