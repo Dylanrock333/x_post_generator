@@ -213,7 +213,7 @@ ${userPrompt}
 ---
 
 I want you to generate a twitter post and threads that is engaging.
-I need a intro post that introduces the video, if there are people in the video, mention them. Make the first post give background of the video in an engaging way.
+I need a intro post that introduces the video, if there are people in the video, mention them. Make the first post give background of the video in an engaging way. Try to keep it under 280 characters if you can.
 Select only the most interesting, informative and engaging points, topics, statements, or claims from this list of selected claims. You can combine or split up the claims to make the post more engaging and/or if they are related.
 Each post should have a topic or point. The posts should stay on topic from the information from the video.
 claims should be in the format of a thread with a number title and timestamp with the quote/claim and context to the quote.
