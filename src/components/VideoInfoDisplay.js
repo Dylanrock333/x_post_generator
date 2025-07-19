@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/VideoInfoDisplay.css';
 
-const VideoInfoDisplay = ({ videoData }) => {
+const VideoInfoDisplay = ({ videoData, videoID }) => {
   if (!videoData) {
     return null;
   }
@@ -34,6 +34,9 @@ const VideoInfoDisplay = ({ videoData }) => {
       </div>
       <div className="video-tags">
         <strong>Tags:</strong> {formattedTags}
+      </div>
+      <div className="video-id">
+        <strong>Video ID:</strong> {videoID}
       </div>
     </div>
   );

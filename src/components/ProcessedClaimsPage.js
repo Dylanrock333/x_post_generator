@@ -36,6 +36,15 @@ const ProcessedClaimsPage = () => {
     return localStorage.getItem('videoUrl') || '';
   });
 
+  const [videoID, setVideoID] = useState(() => {
+    const fromState = location.state?.videoID;
+    if (fromState) {
+      localStorage.setItem('videoID', fromState);
+      return fromState;
+    }
+    return localStorage.getItem('videoID') || '';
+  });
+
   useEffect(() => {
     if (location.state) {
       if (location.state.processedClaims) {
@@ -49,6 +58,10 @@ const ProcessedClaimsPage = () => {
       if (location.state.videoUrl) {
         setVideoUrl(location.state.videoUrl);
         localStorage.setItem('videoUrl', location.state.videoUrl);
+      }
+      if (location.state.videoID) {
+        setVideoID(location.state.videoID);
+        localStorage.setItem('videoID', location.state.videoID);
       }
     }
   }, [location.state]);
@@ -153,16 +166,121 @@ const ProcessedClaimsPage = () => {
     return sections;
   };
 
+  const constructFinalPrompt = (claims, videoData, videoID, userPrompt) => {
+    // --- Construct a detailed prompt for Gemini ---
+    const videoInfoParts = Object.entries(videoData || {}).map(([key, value]) => 
+      `- ${key.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}: ${value}`
+    );
+    
+    // Add video ID to the video information
+    if (videoID) {
+      videoInfoParts.unshift(`- Video ID: ${videoID}`);
+    }
+    
+    const videoInfoStr = videoInfoParts.join('\n');
+    
+    const claimsStrParts = claims.map((claim, index) => {
+      const claimDetails = [
+        `  - Title: ${claim.title || 'N/A'}`,
+        `  - Quote: "${claim.quote || 'N/A'}"`,
+        `  - Context: "${claim.context || 'N/A'}"`,
+        `  - Timestamp: ${claim.timestamp || 'N/A'}`,
+        `  - Category: ${claim.category || 'N/A'}`,
+        `  - Controversy Score: ${claim.controversy_score || 'N/A'}`,
+        `  - Search Query: ${claim.search_query || 'N/A'}`
+      ].join('\n');
+      
+      return `Claim ${index + 1}:\n${claimDetails}`;
+    });
+    const claimsStr = claimsStrParts.join('\n\n');
+
+    // Combine all information into a single, comprehensive prompt
+    const finalPrompt = `
+You are an AI assistant tasked with generating twitter posts based on video content. 
+Here is the information about the video and a set of claims extracted from it using my YouTube claim extractor app, that pulls the claims from the video transcript and formats them.
+Use this context to generate a twitter post that is engaging and informative.
+The following is information about the video and claims extracted from it.
+Follow the user request if provided.
+
+--- VIDEO INFORMATION ---
+${videoInfoStr}
+
+--- SELECTED CLAIMS FROM THE VIDEO ---
+${claimsStr}
+
+--- USER'S REQUEST THEMES OF THE POST ---
+${userPrompt}
+---
+
+I want you to generate a twitter post and threads that is engaging.
+I need a intro post that introduces the video, if there are people in the video, mention them. Make the first post give background of the video in an engaging way.
+Select only the most interesting, informative and engaging points, topics, statements, or claims from this list of selected claims. You can combine or split up the claims to make the post more engaging and/or if they are related.
+Each post should have a topic or point. The posts should stay on topic from the information from the video.
+claims should be in the format of a thread with a number title and timestamp with the quote/claim and context to the quote.
+Claim context should be descriptive and provide enough context to the quote.
+Add a newline after each Title and Quote make sure the intro and outro posts is a bit shorter. Make sure the intro post has enough information so that a reader understands what the posts are about.
+The final post that is a call to action to try my app videoclaimcatcher.com helps people evaluate and learn more about the video. Have the link closer to the top of the post. This end post should be in the same themes as the post and claims.
+
+Here is an example of the format:
+[START OF FORMAT]
+1.*ONLY ONE EMOJI* THREAD_NUMBER TITLE (Timestamp)
+
+quote
+
+context to the quote
+[END OF FORMAT]
+
+Here is an example:
+[START OF EXAMPLE]
+---
+🚨 Sam Altman just dropped a ton of 🔥 insights in the first episode of OpenAI's new podcast.
+
+From AGI timelines and GPT-5 to social media mistakes, hallucinating AIs, and even giant compute facilities…
+
+Here are 9 of the most interesting and surprising things he said 🧵👇
+---
+1. 🧠 AGI Yearly? (00:48)
+
+"I think more and more people will think we've gotten to an AGI system every year."
+
+Each year, AI improves so quickly that public perception is shifting. Altman suggests we may start declaring AGI annually — not because AI is AGI, but because the definition keeps moving forward.
+---
+...
+---
+9. ⚗️ AI & Drug Discovery (35:20)
+
+"We already have existing drugs… but with a couple of small modifications, we are very close to something great."
+
+Altman believes AI could unlock hidden uses of existing medicines — a silent revolution in pharma powered by large models and data reinterpretation.
+---
+🧠 Want to dig deeper into this interview?
+
+🔗 https://videoclaimcatcher.com/analysis-page?videoID=0BGfo4yiCc8
+Get an instant AI-powered breakdown of claims, quotes, and key insights — all from this exact video.
+
+Or analyze any YouTube video at
+🌐 https://videoclaimcatcher.com
+
+Perfect for researchers, journalists, educators, and curious minds. Try it free.
+[END OF EXAMPLE]
+
+The post should match the themes and intesity of the video and claims. Post should be organized by timestamp. The outro post should frame the video and claims in a way that will make the reader want to try the app.
+    `;
+    
+    return finalPrompt;
+  };
+
   const handleGeneratePost = async () => {
     setIsGenerating(true);
     setGeneratedPost('');
     setGenerationError(null);
 
     try {
+      // Construct the final prompt on the frontend
+      const finalPrompt = constructFinalPrompt(processedClaims, videoData, videoID, customPrompt);
+      
       const response = await generatePost({
-        selectedClaims: processedClaims,
-        videoData: videoData,
-        prompt: customPrompt,
+        prompt: finalPrompt,
       });
       setGeneratedPost(response);
     } catch (error) {
@@ -186,7 +304,7 @@ const ProcessedClaimsPage = () => {
   return (
     <div className="processed-claims-page">
       <div className="container">
-        <VideoInfoDisplay videoData={videoData} />
+        <VideoInfoDisplay videoData={videoData} videoID={videoID} />
         <h2>Processed Claims</h2>
         <div className="claims-container">
           {processedClaims.map((claim, index) => (

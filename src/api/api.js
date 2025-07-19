@@ -95,16 +95,13 @@ export const analyzeVideoWithProgress = async (
     }
   };
 
-export const generatePost = async ({ selectedClaims, videoData, prompt }) => {
+export const generatePost = async ({ prompt }) => {
   const BASE_URL = getBaseUrl();
   const request_url = `${BASE_URL}/post/generate`; 
 
-  // The payload will contain the structured data for the backend.
-  // The backend will be responsible for creating the prompt for the Gemini API.
+  // The payload will contain the final prompt constructed on the frontend
   const payload = {
-    claims: selectedClaims,
-    video_data: videoData,
-    prompt: prompt || "give me 10 of the most interesting claims from the video that are suprising and special. should be the most engaging things said in the video. Make it a post that would be interesting to read and share."
+    prompt: prompt
   };
 
   try {

@@ -51,7 +51,7 @@ const VideoInput = () => {
   };
 
   const handleSelectAll = () => {
-    if (!analysisData) return;
+    if (!analysisData || !analysisData.claims) return;
 
     const allClaimIds = analysisData.claims.map(claim => claim.id);
     const allSelected = selectedClaims.length === allClaimIds.length;
@@ -64,12 +64,15 @@ const VideoInput = () => {
   };
 
   const handleProcessClaims = () => {
+    if (!analysisData || !analysisData.claims) return;
+    
     const claimsToProcess = analysisData.claims.filter(claim => selectedClaims.includes(claim.id));
     navigate('/process', { 
       state: { 
         processedClaims: claimsToProcess,
         videoData: analysisData.video_data,
-        videoUrl: videoUrl 
+        videoUrl: videoUrl,
+        videoID: videoID
       } 
     });
   };
@@ -166,11 +169,11 @@ const VideoInput = () => {
 
       {analysisData && !isLoading && (
         <>
-          <VideoInfoDisplay videoData={analysisData.video_data} />
+          <VideoInfoDisplay videoData={analysisData.video_data} videoID={videoID} />
           
           <div className="claims-actions">
             <button onClick={handleSelectAll} className="select-all-button">
-              {analysisData.claims.length === selectedClaims.length
+              {analysisData.claims && analysisData.claims.length === selectedClaims.length
                 ? 'Deselect All'
                 : 'Select All'}
             </button>
