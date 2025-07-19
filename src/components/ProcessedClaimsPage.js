@@ -208,7 +208,7 @@ ${videoInfoStr}
 --- SELECTED CLAIMS FROM THE VIDEO ---
 ${claimsStr}
 
---- USER'S REQUEST THEMES OF THE POST ---
+--- SPECIAL INSTRUCTIONS ---
 ${userPrompt}
 ---
 
@@ -220,6 +220,9 @@ claims should be in the format of a thread with a number title and timestamp wit
 Claim context should be descriptive and provide enough context to the quote.
 Add a newline after each Title and Quote make sure the intro and outro posts is a bit shorter. Make sure the intro post has enough information so that a reader understands what the posts are about.
 The final post that is a call to action to try my app videoclaimcatcher.com helps people evaluate and learn more about the video.
+Make the intro post emotionally compelling or curiosity-driven. Use emotionally charged words or questions if the topic allows. Examples: ‘terrifying’, ‘brilliant’, ‘shocking’, ‘what no one talks about’.
+For particularly bold, surprising, or consequential quotes, use stronger framing — words like ‘game-changing’, ‘existential’, ‘critical’, ‘insightful’, etc.
+Maintain a consistent style and tone across all threads — slightly witty, informative, and confident. Use similar formatting and emoji tone throughout.
 Post should be organized by timestamp. Make sure the into post has a hook to get the reader to get engaged.
 
 Here is an example of the format:
@@ -235,40 +238,38 @@ context to the quote
 Here is an example:
 [START OF EXAMPLE]
 ---
-🚨 Sam Altman just dropped a ton of 🔥 insights in the first episode of OpenAI's new podcast.
+🚨 Tucker Carlson & historian Darryl Cooper just dropped a nearly 3-hour exposé on the Epstein cover-up, connecting it to intelligence agencies, powerful families, and historical scandals the media refuses to touch.
 
-From AGI timelines and GPT-5 to social media mistakes, hallucinating AIs, and even giant compute facilities…
-
-Here are 9 of the most interesting and surprising things he said 🧵👇
+Here are 10 of the most explosive claims from their deep dive 🧵👇
 ---
-1. 🧠 AGI Yearly? (00:48)
+1. 🔗 The First Connection (08:07)
 
-"I think more and more people will think we've gotten to an AGI system every year."
+"He just happens to arrest the guy that his father gave his first job to, job that he was totally unqualified for."
 
-Each year, AI improves so quickly that public perception is shifting. Altman suggests we may start declaring AGI annually — not because AI is AGI, but because the definition keeps moving forward.
+The thread begins with a startling coincidence: Bill Barr, the AG who oversaw Epstein's arrest and death, is the son of Donald Barr, the man who gave an unqualified Jeffrey Epstein his first teaching job at the Dalton School, a connection that raises immediate questions of conflict.
 ---
 ...
 ---
-9. ⚗️ AI & Drug Discovery (35:20)
+10. 📹 The Malfunctioning Cameras (2:31:30)
 
-"We already have existing drugs… but with a couple of small modifications, we are very close to something great."
+"all three of the cameras that uh were relevant to that area of the jail somehow uh had malfunctioned or gone out of service at the same time"
 
-Altman believes AI could unlock hidden uses of existing medicines — a silent revolution in pharma powered by large models and data reinterpretation.
+A key piece of evidence in the suspicious death of Jeffrey Epstein. On the night he died, all three surveillance cameras positioned to monitor his cell block allegedly malfunctioned simultaneously, a detail presented as nearly impossible to believe without foul play.
 ---
-🧠 Want to dig deeper into this interview?
+🧠 Want to explore every argument from this video yourself?
 
-Get an instant breakdown of claims, quotes, and key insights — all from this exact video.
+Get an instant breakdown of the key quotes, controversial points, and hidden insights from this Tucker Carlson video
 🔗 https://videoclaimcatcher.com/analysis-page?videoID=[VIDEO_ID_HERE]
 
 Or analyze any YouTube video at
 🌐 https://videoclaimcatcher.com
 
-Perfect for researchers, journalists, educators, and curious minds. Try it free.
+Try it free
 [END OF EXAMPLE]
 
 Try to keep the outro post short and concise.
 The post should match the themes and intesity of the video and claims.
-Highlight that users can instantly explore the key quotes, arguments, and hidden insights from that video. 
+Make it clear that anyone can instantly get a full breakdown of quotes, arguments, and hidden insights with no effort — just paste a link. Perfect for saving time, catching misinformation, or researching fast.
 Use clear, friendly language — avoid vague terms like 'claims' unless paired with more concrete words like 'quotes' or 'key points.' 
 Emphasize speed, simplicity, and curiosity. Tone should be helpful, smart, and curiosity-driven."
     `;
@@ -416,6 +417,9 @@ Emphasize speed, simplicity, and curiosity. Tone should be helpful, smart, and c
                     />
                   </div>
                 ))}
+              </div>
+              <div>
+              video id: {videoID}
               </div>
             </div>
           )}
