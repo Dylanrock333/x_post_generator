@@ -220,7 +220,7 @@ claims should be in the format of a thread with a number title and timestamp wit
 Claim context should be descriptive and provide enough context to the quote.
 Add a newline after each Title and Quote make sure the intro and outro posts is a bit shorter. Make sure the intro post has enough information so that a reader understands what the posts are about.
 The final post that is a call to action to try my app videoclaimcatcher.com helps people evaluate and learn more about the video.
-Post should be organized by timestamp. 
+Post should be organized by timestamp. Make sure the into post has a hook to get the reader to get engaged.
 
 Here is an example of the format:
 
