@@ -219,9 +219,11 @@ Each post should have a topic or point. The posts should stay on topic from the 
 claims should be in the format of a thread with a number title and timestamp with the quote/claim and context to the quote.
 Claim context should be descriptive and provide enough context to the quote.
 Add a newline after each Title and Quote make sure the intro and outro posts is a bit shorter. Make sure the intro post has enough information so that a reader understands what the posts are about.
-The final post that is a call to action to try my app videoclaimcatcher.com helps people evaluate and learn more about the video. Have the link closer to the top of the post. This end post should be in the same themes as the post and claims.
+The final post that is a call to action to try my app videoclaimcatcher.com helps people evaluate and learn more about the video.
+Post should be organized by timestamp. 
 
 Here is an example of the format:
+
 [START OF FORMAT]
 1.*ONLY ONE EMOJI* THREAD_NUMBER TITLE (Timestamp)
 
@@ -255,8 +257,8 @@ Altman believes AI could unlock hidden uses of existing medicines — a silent r
 ---
 🧠 Want to dig deeper into this interview?
 
-🔗 https://videoclaimcatcher.com/analysis-page?videoID=0BGfo4yiCc8
-Get an instant AI-powered breakdown of claims, quotes, and key insights — all from this exact video.
+Get an instant breakdown of claims, quotes, and key insights — all from this exact video.
+🔗 https://videoclaimcatcher.com/analysis-page?videoID=[VIDEO_ID_HERE]
 
 Or analyze any YouTube video at
 🌐 https://videoclaimcatcher.com
@@ -264,10 +266,11 @@ Or analyze any YouTube video at
 Perfect for researchers, journalists, educators, and curious minds. Try it free.
 [END OF EXAMPLE]
 
-The post should match the themes and intesity of the video and claims. Post should be organized by timestamp. 
+Try to keep the outro post short and concise.
+The post should match the themes and intesity of the video and claims.
 Highlight that users can instantly explore the key quotes, arguments, and hidden insights from that video. 
 Use clear, friendly language — avoid vague terms like 'claims' unless paired with more concrete words like 'quotes' or 'key points.' 
-Emphasize speed, simplicity, and curiosity. Tone should be helpful, smart, and curiosity-driven.
+Emphasize speed, simplicity, and curiosity. Tone should be helpful, smart, and curiosity-driven."
     `;
     
     return finalPrompt;
