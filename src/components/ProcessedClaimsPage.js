@@ -264,7 +264,10 @@ Or analyze any YouTube video at
 Perfect for researchers, journalists, educators, and curious minds. Try it free.
 [END OF EXAMPLE]
 
-The post should match the themes and intesity of the video and claims. Post should be organized by timestamp. The outro post should frame the video and claims in a way that will make the reader want to try the app.
+The post should match the themes and intesity of the video and claims. Post should be organized by timestamp. 
+Highlight that users can instantly explore the key quotes, arguments, and hidden insights from that video. 
+Use clear, friendly language — avoid vague terms like 'claims' unless paired with more concrete words like 'quotes' or 'key points.' 
+Emphasize speed, simplicity, and curiosity. Tone should be helpful, smart, and curiosity-driven.
     `;
     
     return finalPrompt;
