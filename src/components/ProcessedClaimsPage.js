@@ -261,10 +261,7 @@ A key piece of evidence in the suspicious death of Jeffrey Epstein. On the night
 Get an instant breakdown of the key quotes, controversial points, and hidden insights from this Tucker Carlson video
 🔗 https://videoclaimcatcher.com/analysis-page?videoID=[VIDEO_ID_HERE]
 
-Or analyze any YouTube video at
-🌐 https://videoclaimcatcher.com
-
-Try it free
+Try it now for free!
 [END OF EXAMPLE]
 
 Try to keep the outro post short and concise.
