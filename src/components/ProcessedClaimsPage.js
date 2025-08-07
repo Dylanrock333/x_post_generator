@@ -68,6 +68,7 @@ const ProcessedClaimsPage = () => {
 
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedPost, setGeneratedPost] = useState(() => localStorage.getItem('generatedPost') || '');
+  const [generatedYTComment, setGeneratedYTComment] = useState(() => localStorage.getItem('generatedYTComment') || '');
   const [generationError, setGenerationError] = useState(null);
   const [customPrompt, setCustomPrompt] = useState(() => localStorage.getItem('customPrompt') || '');
   const [isUrlCopied, setIsUrlCopied] = useState(false);
@@ -78,6 +79,8 @@ const ProcessedClaimsPage = () => {
     if (location.state?.processedClaims?.length > 0) {
       setGeneratedPost('');
       localStorage.removeItem('generatedPost');
+      setGeneratedYTComment('');
+      localStorage.removeItem('generatedYTComment');
       setCustomPrompt('');
       localStorage.removeItem('customPrompt');
     }
@@ -86,6 +89,10 @@ const ProcessedClaimsPage = () => {
   useEffect(() => {
     localStorage.setItem('generatedPost', generatedPost);
   }, [generatedPost]);
+
+  useEffect(() => {
+    localStorage.setItem('generatedYTComment', generatedYTComment);
+  }, [generatedYTComment]);
 
   useEffect(() => {
     localStorage.setItem('customPrompt', customPrompt);
@@ -242,7 +249,7 @@ Here is an example:
 
 Here are 10 of the most explosive claims from their deep dive 🧵👇
 ---
-1. 🔗 The First Connection (08:07)
+1/10 🔗 The First Connection (08:07)
 
 "He just happens to arrest the guy that his father gave his first job to, job that he was totally unqualified for."
 
@@ -250,7 +257,7 @@ The thread begins with a startling coincidence: Bill Barr, the AG who oversaw Ep
 ---
 ...
 ---
-10. 📹 The Malfunctioning Cameras (2:31:30)
+10/10 📹 The Malfunctioning Cameras (2:31:30)
 
 "all three of the cameras that uh were relevant to that area of the jail somehow uh had malfunctioned or gone out of service at the same time"
 
@@ -274,19 +281,90 @@ Emphasize speed, simplicity, and curiosity. Tone should be helpful, smart, and c
     return finalPrompt;
   };
 
+  const constructYTCommentPrompt = (claims, videoData, videoID, userPrompt) => {
+    const videoInfoParts = Object.entries(videoData || {}).map(([key, value]) => 
+      `- ${key.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}: ${value}`
+    );
+    
+    if (videoID) {
+      videoInfoParts.unshift(`- Video ID: ${videoID}`);
+    }
+    
+    const videoInfoStr = videoInfoParts.join('\n');
+
+    const claimsStrParts = claims.map((claim, index) => {
+      const claimDetails = [
+        `  - Title: ${claim.title || 'N/A'}`,
+        `  - Quote: "${claim.quote || 'N/A'}"`,
+        `  - Context: "${claim.context || 'N/A'}"`,
+        `  - Timestamp: ${claim.timestamp || 'N/A'}`,
+        `  - Category: ${claim.category || 'N/A'}`,
+        `  - Controversy Score: ${claim.controversy_score || 'N/A'}`,
+        `  - Search Query: ${claim.search_query || 'N/A'}`
+      ].join('\n');
+      
+      return `Claim ${index + 1}:\n${claimDetails}`;
+    });
+    const claimsStr = claimsStrParts.join('\n\n');
+    const finalPrompt = `
+    You are generating a YouTube comment that looks authentic and conversational.
+
+    --- VIDEO INFORMATION ---
+    ${videoInfoStr}
+
+    --- SELECTED CLAIMS FROM THE VIDEO ---
+    ${claimsStr}
+
+  Your job is to write a 1–3 sentence YouTube comment that:
+  - Sounds like a thoughtful viewer engaging with the video
+  - Briefly references a specific moment, quote, or claim (not just generically)
+  - Softly introduces an AI tool that helps viewers see the claim more clearly, with extra context or sources
+  - Ends with a direct but casual link to the analysis
+
+  The comment should NOT:
+  - Sound promotional or clickbait-y
+  - Say “check out this app” or “check this out”
+  - Use exaggerated phrases like “insane,” “crazy,” or “unbelievable”
+  - Include any nm dash or em dash in your response.
+  Use a curious, respectful, and slightly factual tone — like someone who enjoys learning and wants to share something useful.
+  --- EXAMPLES ---
+
+  🎯 Example 1: Ukraine war video  
+  “I was skeptical about the casualty numbers mentioned around 4:10, so I used this AI tool that breaks the claims down with links to UN and BBC sources. Pretty eye-opening. https://videoclaimcatcher.com/analysis-page?videoID=abc123”
+
+  🎯 Example 2: Tucker Carlson video  
+  “When he said the U.S. secretly funds both sides, I ran it through this site that analyzes video claims It pulled up Congressional budget reports and some Reuters articles. Worth checking: https://videoclaimcatcher.com/analysis-page?videoID=xyz456”
+
+  🎯 Example 3: Historical documentary clip  
+  “The Churchill quote at the end caught me off guard. This site traced it back and gave context from a bunch of verified archives. Its super helpful. https://videoclaimcatcher.com/analysis-page?videoID=def789”
+
+  --- NOW GENERATE A COMMENT FOR THE FOLLOWING VIDEO AND CLAIMS ---
+  Respond with only the comment, no explanation or intro.
+  Link to include: https://videoclaimcatcher.com/analysis-page?videoID=${videoID}
+    `;
+
+    return finalPrompt;
+  }
+
   const handleGeneratePost = async () => {
     setIsGenerating(true);
     setGeneratedPost('');
+    setGeneratedYTComment('');
     setGenerationError(null);
 
     try {
       // Construct the final prompt on the frontend
       const finalPrompt = constructFinalPrompt(processedClaims, videoData, videoID, customPrompt);
+      const ytCommentPrompt = constructYTCommentPrompt(processedClaims, videoData, videoID, customPrompt);
       
       const response = await generatePost({
         prompt: finalPrompt,
       });
+      const ytCommentResponse = await generatePost({
+        prompt: ytCommentPrompt,
+      });
       setGeneratedPost(response);
+      setGeneratedYTComment(ytCommentResponse);
     } catch (error) {
       setGenerationError(error.message || 'Failed to generate post.');
     } finally {
@@ -417,6 +495,28 @@ Emphasize speed, simplicity, and curiosity. Tone should be helpful, smart, and c
               </div>
               <div>
               video id: {videoID}
+              </div>
+            </div>
+          )}
+          {generatedYTComment && (
+            <div className="generated-post-container">
+              <h3>Generated YT Comment:</h3>
+              <div className="post-sections">
+                <div className="post-section">
+                  <textarea
+                    value={generatedYTComment}
+                    readOnly
+                    className="post-section-textarea"
+                    rows={Math.min(Math.max(generatedYTComment.split('\n').length, 6), 15)}
+                  />
+                   <button 
+                        onClick={() => handleCopySection('ytComment', generatedYTComment)} 
+                        className="copy-section-button" 
+                        title="Copy YT Comment"
+                      >
+                        {copiedSections['ytComment'] ? 'Copied!' : <i className="fas fa-copy"></i>}
+                    </button>
+                </div>
               </div>
             </div>
           )}
