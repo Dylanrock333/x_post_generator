@@ -266,7 +266,7 @@ A key piece of evidence in the suspicious death of Jeffrey Epstein. On the night
 🧠 Want to explore every argument from this video yourself?
 
 Get an instant breakdown of the key quotes, controversial points, and hidden insights from this Tucker Carlson video
-🔗 https://videoclaimcatcher.com/analysis-page?videoID=[VIDEO_ID_HERE]
+🔗 https://videoclaimcatcher.com/analysis?v=[VIDEO_ID_HERE]
 
 Try it now for free!
 [END OF EXAMPLE]
@@ -340,7 +340,7 @@ Emphasize speed, simplicity, and curiosity. Tone should be helpful, smart, and c
 
   --- NOW GENERATE A COMMENT FOR THE FOLLOWING VIDEO AND CLAIMS ---
   Respond with only the comment, no explanation or intro.
-  Link to include: https://videoclaimcatcher.com/analysis-page?videoID=${videoID}
+  Link to include: https://videoclaimcatcher.com/analysis?v=${videoID}
     `;
 
     return finalPrompt;
