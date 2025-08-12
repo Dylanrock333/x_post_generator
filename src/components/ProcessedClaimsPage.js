@@ -330,13 +330,13 @@ Emphasize speed, simplicity, and curiosity. Tone should be helpful, smart, and c
   --- EXAMPLES ---
 
   🎯 Example 1: Ukraine war video  
-  “I was skeptical about the casualty numbers mentioned around 4:10, so I used this AI tool that breaks the claims down with links to UN and BBC sources. Pretty eye-opening. https://videoclaimcatcher.com/analysis-page?videoID=abc123”
+  “I was skeptical about the casualty numbers mentioned around 4:10, so I used this AI tool that breaks the claims down with links to UN and BBC sources. Pretty eye-opening. https://videoclaimcatcher.com/analysis?v=abc123”
 
   🎯 Example 2: Tucker Carlson video  
-  “When he said the U.S. secretly funds both sides, I ran it through this site that analyzes video claims It pulled up Congressional budget reports and some Reuters articles. Worth checking: https://videoclaimcatcher.com/analysis-page?videoID=xyz456”
+  “When he said the U.S. secretly funds both sides, I ran it through this site that analyzes video claims It pulled up Congressional budget reports and some Reuters articles. Worth checking: https://videoclaimcatcher.com/analysis?v=xyz456”
 
   🎯 Example 3: Historical documentary clip  
-  “The Churchill quote at the end caught me off guard. This site traced it back and gave context from a bunch of verified archives. Its super helpful. https://videoclaimcatcher.com/analysis-page?videoID=def789”
+  “The Churchill quote at the end caught me off guard. This site traced it back and gave context from a bunch of verified archives. Its super helpful. https://videoclaimcatcher.com/analysis?vD=def789”
 
   --- NOW GENERATE A COMMENT FOR THE FOLLOWING VIDEO AND CLAIMS ---
   Respond with only the comment, no explanation or intro.
