@@ -248,6 +248,7 @@ Here is an example:
 🚨 Tucker Carlson & historian Darryl Cooper just dropped a nearly 3-hour exposé on the Epstein cover-up, connecting it to intelligence agencies, powerful families, and historical scandals the media refuses to touch.
 
 Here are 10 of the most explosive claims from their deep dive 🧵👇
+youtube.com/watch?v=[VIDEO_ID_HERE]
 ---
 1/10 🔗 The First Connection (08:07)
 
@@ -266,9 +267,9 @@ A key piece of evidence in the suspicious death of Jeffrey Epstein. On the night
 🧠 Want to explore every argument from this video yourself?
 
 Get an instant breakdown of the key quotes, controversial points, and hidden insights from this Tucker Carlson video
-🔗 https://videoclaimcatcher.com/analysis?v=[VIDEO_ID_HERE]
 
-Try it now for free!
+🔗 verofyi.com/analysis?v=[VIDEO_ID_HERE]
+
 [END OF EXAMPLE]
 
 Try to keep the outro post short and concise.
@@ -340,7 +341,7 @@ Emphasize speed, simplicity, and curiosity. Tone should be helpful, smart, and c
 
   --- NOW GENERATE A COMMENT FOR THE FOLLOWING VIDEO AND CLAIMS ---
   Respond with only the comment, no explanation or intro.
-  Link to include: https://videoclaimcatcher.com/analysis?v=${videoID}
+  Link to include: verofyi.com/analysis?v=${videoID}
     `;
 
     return finalPrompt;
