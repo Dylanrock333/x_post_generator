@@ -226,7 +226,7 @@ Each post should have a topic or point. The posts should stay on topic from the 
 claims should be in the format of a thread with a number title and timestamp with the quote/claim and context to the quote.
 Claim context should be descriptive and provide enough context to the quote.
 Add a newline after each Title and Quote make sure the intro and outro posts is a bit shorter. Make sure the intro post has enough information so that a reader understands what the posts are about.
-The final post that is a call to action to try my app videoclaimcatcher.com helps people evaluate and learn more about the video.
+The final post that is a call to action to try my app verofyi.com helps people evaluate and learn more about the video.
 Make the intro post emotionally compelling or curiosity-driven. Use emotionally charged words or questions if the topic allows. Examples: ‘terrifying’, ‘brilliant’, ‘shocking’, ‘what no one talks about’.
 For particularly bold, surprising, or consequential quotes, use stronger framing — words like ‘game-changing’, ‘existential’, ‘critical’, ‘insightful’, etc.
 Maintain a consistent style and tone across all threads — slightly witty, informative, and confident. Use similar formatting and emoji tone throughout.
@@ -277,6 +277,7 @@ The post should match the themes and intesity of the video and claims.
 Make it clear that anyone can instantly get a full breakdown of quotes, arguments, and hidden insights with no effort — just paste a link. Perfect for saving time, catching misinformation, or researching fast.
 Use clear, friendly language — avoid vague terms like 'claims' unless paired with more concrete words like 'quotes' or 'key points.' 
 Emphasize speed, simplicity, and curiosity. Tone should be helpful, smart, and curiosity-driven."
+Do not include any nm dash or em dash in your response or on any of the posts.
     `;
     
     return finalPrompt;
@@ -331,13 +332,13 @@ Emphasize speed, simplicity, and curiosity. Tone should be helpful, smart, and c
   --- EXAMPLES ---
 
   🎯 Example 1: Ukraine war video  
-  “I was skeptical about the casualty numbers mentioned around 4:10, so I used this AI tool that breaks the claims down with links to UN and BBC sources. Pretty eye-opening. https://videoclaimcatcher.com/analysis?v=abc123”
+  “I was skeptical about the casualty numbers mentioned around 4:10, so I used this AI tool that breaks the claims down with links to UN and BBC sources. Pretty eye-opening. https://verofyi.com/analysis?v=abc123”
 
   🎯 Example 2: Tucker Carlson video  
-  “When he said the U.S. secretly funds both sides, I ran it through this site that analyzes video claims It pulled up Congressional budget reports and some Reuters articles. Worth checking: https://videoclaimcatcher.com/analysis?v=xyz456”
+  “When he said the U.S. secretly funds both sides, I ran it through this site that analyzes video claims It pulled up Congressional budget reports and some Reuters articles. Worth checking: https://verofyi.com/analysis?v=xyz456”
 
   🎯 Example 3: Historical documentary clip  
-  “The Churchill quote at the end caught me off guard. This site traced it back and gave context from a bunch of verified archives. Its super helpful. https://videoclaimcatcher.com/analysis?vD=def789”
+  “The Churchill quote at the end caught me off guard. This site traced it back and gave context from a bunch of verified archives. Its super helpful. https://verofyi.com/analysis?vD=def789”
 
   --- NOW GENERATE A COMMENT FOR THE FOLLOWING VIDEO AND CLAIMS ---
   Respond with only the comment, no explanation or intro.
